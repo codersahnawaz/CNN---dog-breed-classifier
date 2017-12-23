@@ -13279,6 +13279,13 @@ percentage of the first 100 images in dog_files have a detected human face : 11%
 <p><strong>Question 2:</strong> This algorithmic choice necessitates that we communicate to the user that we accept human images only when they provide a clear view of a face (otherwise, we risk having unneccessarily frustrated users!). In your opinion, is this a reasonable expectation to pose on the user? If not, can you think of a way to detect humans in images that does not necessitate an image with a clearly presented face?</p>
 <p><strong>Answer:</strong></p>
 <p>We suggest the face detector from OpenCV as a potential way to detect human images in your algorithm, but you are free to explore other approaches, especially approaches that make use of deep learning :).  Please use the code cell below to design and test your own face detection algorithm.  If you decide to pursue this <em>optional</em> task, report performance on each of the datasets.</p>
+<h2 id="Here's-my-answer--:-">Here's my answer  :-<a class="anchor-link" href="#Here's-my-answer--:-">&#182;</a></h2><p>The cascade classifier is definitely a good option for face detection.But CNN has outperformed cascade classifier in quite a few points.</p>
+<h2 id="Precision-and-Recall">Precision and Recall<a class="anchor-link" href="#Precision-and-Recall">&#182;</a></h2><p>Both CNN and Haar classifier have a relatively high level of precision and recall when detecting objects in images.</p>
+<h2 id="Scale-Invariance">Scale Invariance<a class="anchor-link" href="#Scale-Invariance">&#182;</a></h2><p>Haar cascade classifier easily manage scaling objects due to strong invariance. However, CNN cannot manage scaling objects well due to low scale invariance.</p>
+<h2 id="Number-of-Attempts-Required-to-Receive-a-Working-Model">Number of Attempts Required to Receive a Working Model<a class="anchor-link" href="#Number-of-Attempts-Required-to-Receive-a-Working-Model">&#182;</a></h2><p>Cascade classifiers require only a few attempts to get a working model for object detection. CNN is not so fast and requires dozens of experiments.</p>
+<h2 id="Processing-Time">Processing Time<a class="anchor-link" href="#Processing-Time">&#182;</a></h2><p>A convolutional neural network does not require much time for processing. As for the Haar classifier, it takes much longer to be processed.</p>
+<h2 id="Consistency-With-Tilting-Objects">Consistency With Tilting Objects<a class="anchor-link" href="#Consistency-With-Tilting-Objects">&#182;</a></h2><p>Another great advantage of the convolutional neural network is the consistency with tilting objects. Cascade classifiers are not consistent in these cases.</p>
+<p>So i will choose a CNN for for face detection.</p>
 
 </div>
 </div>
@@ -14272,6 +14279,8 @@ test_{network} = bottleneck_features['test']</code></pre>
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong> I chose GlobalAveragePooling layer to flatten the features into a vector that could be fed into a fully-connected layer. I added a dropout to prevent overfitting. Finally, the softmax layer does the prediction.</p>
+<h2 id="why-this-works-:--">why this works :- <a class="anchor-link" href="#why-this-works-:--">&#182;</a></h2><p>because it's transfer learning. In transfer learning, we essentially copy the CNN architecture of a state-of-
+the-art model, and then perform additional training to learn from provided dataset.Early layers in the network learn to identify general shapes and patterns in the image, whereas later layers look for more specific features within image. We can leverage these pretrained filters from existing models to build a CNN for object recognition. And moreover our dataset is small compared to ImageNet where the weights are pretrained and our dataset is very similar to ImageNet.</p>
 
 </div>
 </div>
